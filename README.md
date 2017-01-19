@@ -1,6 +1,6 @@
 # Simrank
 spark-simrank   scala
-This project based on spark-2.0.2-with-hive. You can start run.sh to run Jar file with spark-submit.Attention that paramiters to start spark.
+This project based on spark-2.0.2-with-hive. You can start run.sh to run Jar file with spark-submit.Attention that parameters to start spark.
 They are:
 --num-executors 200
 --driver-memory 20G
