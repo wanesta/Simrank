@@ -1,8 +1,8 @@
 #!/bin/sh
-workspace="/user/guanggao/car_similar/v4/pregraph/nodes_pairs/part-*"
+workspace="/user/data/data.txt"
 conf=$workspace
 
-spark="/data/sysdir/spark-2.0.2-with-hive/bin/spark-submit"
+spark="/spark-2.0.2-with-hive/bin/spark-submit"
 exec="--queue q_guanggao.q_adalg 
 --num-executors 200
 --driver-memory 20G
@@ -14,7 +14,7 @@ exec="--queue q_guanggao.q_adalg
 --conf spark.storage.memoryFraction=0.7
 --conf spark.memory.storageFaction=0.5
 --class com.autohome.algo.simrank.Simrank
-/data/home/guanggao/semon/JAR/Simrank/com.autohome.algo.simrank.jar $conf"
+/data/home/guanggao/semon/JAR/Simrank/simrank.jar $conf"
 echo $exec
 
 #--conf spark.default.parallelism=800
