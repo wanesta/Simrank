@@ -114,27 +114,6 @@ object Simrank {
       val set = MatrixEntry(x._1,x._2,x._3 * delta)
       set
     }.distinct)
-    /*
-    val basematrix = sc.parallelize(m_list(len,len){ (i:Int, j:Int)=>   //单位方阵
-      if (i == j) 1.0 else 0.0
-    }.map{x =>
-      //val vec = DenseVector(x.toArray).toDenseVector.toDenseMatrix
-      val vec = DenseVector(x.toArray.zipWithIndex).map(x=>(x._2.toInt,x._1))
-      //val ve = Vectors.sparse(node_len,x.toVector.zipWithIndex.map(x => (x._2,x._1)))   //RowMatrix
-      val v = SparseVector(x.toArray)
-      vec
-    })//.zipWithIndex//.map(x=>(x._2.toString.toInt,x._1))
-    //basematrix.foreach(println)
-    val un = new CoordinateMatrix(basematrix.zipWithIndex.map{x =>
-      val set = MatrixEntry(x._2,x._2,1.0)
-      set
-    })
-    val unitmatrix = new CoordinateMatrix(basematrix.zipWithIndex().flatMap {  //单位矩阵
-      case (vector, i) => vector.toArray.map {
-        case (j, v) => MatrixEntry(i, j, v)
-      }
-    })
-    */
     val In = new CoordinateMatrix(matrixp.entries.map{x => //s0 = (1-C)In
       val set = MatrixEntry(x.i,x.j,x.value * (1 - delta))
       set
@@ -161,8 +140,6 @@ object Simrank {
       .map(x=>(x._2._1._1,(x._2._1._2,x._2._2))).join(indnode.map(x=>(x._2,x._1.toLong)))
       .map(x => (x._2._1._2,x._2._2,x._2._1._1))
 
-    //result.foreach(println)
-    //println(result.map(_._3).max)
-    result.filter(_._3.toDouble < 1.0).saveAsTextFile("/user/guanggao/car_similar/v4/pregraph/ot")
+    result.filter(_._3.toDouble < 1.0).saveAsTextFile("/output")
   }
 }
